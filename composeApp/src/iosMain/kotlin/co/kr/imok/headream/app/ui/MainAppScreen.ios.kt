@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.ui
+package co.kr.imokapp.headream.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -14,12 +14,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.background
 import kotlinx.coroutines.delay
-import co.kr.imok.headream.app.audio.AudioPlaybackManager
-import co.kr.imok.headream.app.audio.initializeAudioWithContext
-import co.kr.imok.headream.app.data.CallRecord
-import co.kr.imok.headream.app.navigation.BottomNavItem
-import co.kr.imok.headream.app.navigation.Screen
-import co.kr.imok.headream.app.viewmodel.CallViewModel
+import co.kr.imokapp.headream.audio.AudioPlaybackManager
+import co.kr.imokapp.headream.audio.initializeAudioWithContext
+import co.kr.imokapp.headream.data.CallRecord
+import co.kr.imokapp.headream.navigation.BottomNavItem
+import co.kr.imokapp.headream.navigation.Screen
+import co.kr.imokapp.headream.viewmodel.CallViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -103,7 +103,7 @@ actual fun MainAppScreenWithBackHandler(
         Column(
             modifier = modifier.fillMaxSize()
         ) {
-            // 상태바 영역 배경색 (해드림 브랜드 색상)
+            // 상태바 영역 배경색 (토닥 브랜드 색상)
             Spacer(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -124,12 +124,9 @@ actual fun MainAppScreenWithBackHandler(
                             currentScreen = Screen.CallHistory.route
                         },
                         onStartCall = {
-                            // 기기의 전화번호를 가져와서 서버로 전송
-                            val devicePhoneNumber = viewModel.getDevicePhoneNumber()
-                            println("🔥 onStartCall - 기기 전화번호: ${devicePhoneNumber ?: "없음"}")
-                            
-                            // 실제 전화 걸기 (기존 로직)
-                            viewModel.startCall("010-8745-8123")
+                            // iOS에서는 전화번호 수집 없이 전화 앱만 열기
+                            println("📱 iOS - 전화 앱 열기 (010-4798-8123)")
+                            viewModel.startCallForIOS("010-4798-8123")
                         },
                         modifier = Modifier.fillMaxSize()
                     )

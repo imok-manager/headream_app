@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.platform
+package co.kr.imokapp.headream.platform
 
 expect class PreferencesManager() {
     fun getString(key: String, defaultValue: String? = null): String?

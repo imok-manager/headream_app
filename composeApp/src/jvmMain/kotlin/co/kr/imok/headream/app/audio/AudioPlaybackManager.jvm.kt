@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.audio
+package co.kr.imokapp.headream.audio
 
 actual object AudioPlaybackManager {
     actual fun initialize() {

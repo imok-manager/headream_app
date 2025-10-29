@@ -18,19 +18,8 @@
     <!-- 전화 상태 읽기 권한 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     
-    <!-- 전화번호 읽기 권한 (Android 6.0+) -->
-    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
-    
-    <!-- SMS 읽기 권한 (전화번호 가져오기 대체 방법) -->
-    <uses-permission android:name="android.permission.READ_SMS" />
-    
-    <!-- 외부 저장소 쓰기 권한 (녹음 파일 저장용) -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    
-    <!-- 시스템 정보 접근 권한 -->
-    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <!-- 외부 저장소 권한은 녹음 파일을 cacheDir에 저장하므로 불필요 -->
+    <!-- READ_SMS, READ_PHONE_NUMBERS는 기본 SMS/전화 핸들러가 아니므로 Google Play 정책상 사용 불가 -->
 
     <application
         android:allowBackup="true"

@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.ui
+package co.kr.imokapp.headream.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -17,12 +17,12 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.background
 // Lifecycle 관련은 Android 전용이므로 제거
 import kotlinx.coroutines.delay
-import co.kr.imok.headream.app.audio.AudioPlaybackManager
-import co.kr.imok.headream.app.audio.initializeAudioWithContext
-import co.kr.imok.headream.app.data.CallRecord
-import co.kr.imok.headream.app.navigation.BottomNavItem
-import co.kr.imok.headream.app.navigation.Screen
-import co.kr.imok.headream.app.viewmodel.CallViewModel
+import co.kr.imokapp.headream.audio.AudioPlaybackManager
+import co.kr.imokapp.headream.audio.initializeAudioWithContext
+import co.kr.imokapp.headream.data.CallRecord
+import co.kr.imokapp.headream.navigation.BottomNavItem
+import co.kr.imokapp.headream.navigation.Screen
+import co.kr.imokapp.headream.viewmodel.CallViewModel
 
 // 플랫폼별 뒤로가기 처리를 위한 expect 함수
 @Composable

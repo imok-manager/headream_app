@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.ui
+package co.kr.imokapp.headream.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -20,8 +20,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import co.kr.imok.headream.app.audio.AudioPlaybackManager
-import co.kr.imok.headream.app.data.CallRecord
+import co.kr.imokapp.headream.audio.AudioPlaybackManager
+import co.kr.imokapp.headream.data.CallRecord
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
@@ -56,7 +56,8 @@ fun CallDetailScreen(
                 title = { 
                     Text(
                         "${callIndex}번째 상담통화",
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 18.sp
                     )
                 },
                 navigationIcon = {
@@ -88,7 +89,12 @@ fun CallDetailScreen(
         Column(
             modifier = modifier
                 .fillMaxSize()
-                .padding(paddingValues)
+                .padding(
+                    top = paddingValues.calculateTopPadding() - 8.dp,
+                    start = 0.dp,
+                    end = 0.dp,
+                    bottom = paddingValues.calculateBottomPadding()
+                )
                 .verticalScroll(rememberScrollState())
         ) {
             detailRecord?.let { currentRecord ->

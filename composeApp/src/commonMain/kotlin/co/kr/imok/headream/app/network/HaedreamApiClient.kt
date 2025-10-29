@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.network
+package co.kr.imokapp.headream.network
 
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -7,7 +7,7 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
-import co.kr.imok.headream.app.data.*
+import co.kr.imokapp.headream.data.*
 
 class HaedreamApiClient {
     private val baseUrl = "https://apia.im-ok.co.kr/app"

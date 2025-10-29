@@ -13,10 +13,10 @@ import androidx.activity.compose.BackHandler
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.compose.material3.MaterialTheme
-import co.kr.imok.headream.app.App
-import co.kr.imok.headream.app.audio.initializeAudioWithContext
-import co.kr.imok.headream.app.di.AppModule
-import co.kr.imok.headream.app.platform.AndroidContext
+import co.kr.imokapp.headream.App
+import co.kr.imokapp.headream.audio.initializeAudioWithContext
+import co.kr.imokapp.headream.di.AppModule
+import co.kr.imokapp.headream.platform.AndroidContext
 
 class MainActivity : ComponentActivity() {
     
@@ -68,13 +68,9 @@ class MainActivity : ComponentActivity() {
     
     private fun requestPermissions() {
         val permissions = arrayOf(
-            Manifest.permission.CALL_PHONE,
-            Manifest.permission.RECORD_AUDIO,
-            Manifest.permission.READ_PHONE_STATE,
-            Manifest.permission.READ_PHONE_NUMBERS,  // 전화번호 읽기 권한 추가
-            Manifest.permission.READ_SMS,            // SMS 읽기 권한 추가 (대체 방법)
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE
+            Manifest.permission.CALL_PHONE,           // 전화 걸기
+            Manifest.permission.RECORD_AUDIO,         // 통화 녹음
+            Manifest.permission.READ_PHONE_STATE      // 통화 상태 모니터링
         )
         
         val permissionsToRequest = permissions.filter {

@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app
+package co.kr.imokapp.headream
 
 class WasmPlatform: Platform {
     override val name: String = "Web with Kotlin/Wasm"

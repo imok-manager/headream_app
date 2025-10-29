@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app
+package co.kr.imokapp.headream
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,8 +7,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import co.kr.imok.headream.app.di.AppModule
-import co.kr.imok.headream.app.ui.HaedreamApp
+import co.kr.imokapp.headream.di.AppModule
+import co.kr.imokapp.headream.ui.HaedreamApp
 
 @Composable
 @Preview

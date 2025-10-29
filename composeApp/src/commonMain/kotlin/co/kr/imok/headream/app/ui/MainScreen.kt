@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.ui
+package co.kr.imokapp.headream.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -32,7 +32,7 @@ fun MainScreen(
     ) {
         // 상단 타이틀
         Text(
-            text = "HAEDREAM",
+            text = "토닥",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = Color(0xFF212121),
@@ -45,7 +45,7 @@ fun MainScreen(
                 .fillMaxWidth()
                 .padding(bottom = 32.dp),
             colors = CardDefaults.cardColors(
-                containerColor = Color(0xFFF5F3E7) // 베이지 색상
+                containerColor = Color(0xFFF7EFDD) // 베이지 색상
             ),
             shape = RoundedCornerShape(16.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)

@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app
+package co.kr.imokapp.headream
 
 class JsPlatform: Platform {
     override val name: String = "Web with Kotlin/JS"

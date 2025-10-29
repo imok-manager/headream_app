@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.ui
+package co.kr.imokapp.headream.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -25,8 +25,8 @@ actual fun PlatformImage(
     ) {
         Text(
             text = when (resourceName) {
-                "logo_haedream" -> "LOGO"
-                "banner_counseling" -> "BANNER"
+                "logo_todoc" -> "LOGO"
+                "main_banner" -> "BANNER"
                 else -> "IMAGE"
             },
             color = Color.Gray
@@ -55,7 +55,7 @@ actual fun LogoImage(modifier: Modifier) {
             Spacer(modifier = Modifier.height(8.dp))
             
             Text(
-                text = "해드림",
+                text = "토닥",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Medium,
                 color = Color(0xFF2E7D32),

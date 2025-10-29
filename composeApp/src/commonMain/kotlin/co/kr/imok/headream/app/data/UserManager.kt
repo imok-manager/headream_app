@@ -1,11 +1,11 @@
-package co.kr.imok.headream.app.data
+package co.kr.imokapp.headream.data
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import co.kr.imok.headream.app.Platform
-import co.kr.imok.headream.app.network.HaedreamApiClient
-import co.kr.imok.headream.app.platform.DeviceInfoProvider
+import co.kr.imokapp.headream.Platform
+import co.kr.imokapp.headream.network.HaedreamApiClient
+import co.kr.imokapp.headream.platform.DeviceInfoProvider
 import kotlin.random.Random
 
 class UserManager(

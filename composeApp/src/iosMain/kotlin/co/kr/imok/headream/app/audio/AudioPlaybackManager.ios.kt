@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.audio
+package co.kr.imokapp.headream.audio
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -6,6 +6,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.datetime.Clock
 import platform.Foundation.*
 import platform.UIKit.*
+import platform.darwin.NSObject
+import kotlinx.cinterop.*
+
+// Swift 브릿지 사용
 
 actual object AudioPlaybackManager {
     private var isInitialized = false
@@ -30,16 +34,91 @@ actual object AudioPlaybackManager {
     actual fun initialize() {
         println("🎵 AudioPlaybackManager - iOS 초기화")
         isInitialized = true
+        
+        // Duration Notification 리스너 설정
+        setupDurationListener()
+        
         println("🎵 iOS 오디오 초기화 완료 (향상된 시뮬레이션 + URL 재생)")
     }
     
+    private fun setupDurationListener() {
+        val notificationCenter = NSNotificationCenter.defaultCenter
+        notificationCenter.addObserverForName(
+            name = "AudioDurationReady",
+            `object` = null,
+            queue = NSOperationQueue.mainQueue,
+            usingBlock = { notification ->
+                val duration = (notification?.userInfo?.get("duration") as? NSNumber)?.doubleValue
+                if (duration != null) {
+                    val durationMs = (duration * 1000).toLong()
+                    totalDuration = durationMs
+                    _duration.value = durationMs
+                    println("🎵 AudioPlaybackManager - Duration 수신: ${duration}초 (${durationMs}ms)")
+                }
+            }
+        )
+    }
+    
     actual fun play(url: String) {
-        println("🎵 AudioPlaybackManager - iOS 재생: $url")
+        println("🎵 AudioPlaybackManager - iOS 앱 내 재생: $url")
         
         if (!isInitialized) {
             initialize()
         }
         
+        // Swift 브릿지를 통한 실제 앱 내 m4a 재생
+        try {
+            if (SwiftAudioBridge.isAvailable()) {
+                println("🎵 AudioPlaybackManager - Swift 브릿지를 통한 실제 재생...")
+                SwiftAudioBridge.playURL(url)
+                
+                currentUrl = url
+                currentlyPlaying = true
+                _isPlaying.value = true
+                startTime = Clock.System.now().toEpochMilliseconds() - pausedPosition
+                
+                // URL 기반 재생 시간 설정
+                totalDuration = when {
+                    url.contains("sample") -> 45000L // 45초
+                    url.contains("long") -> 120000L // 2분
+                    url.contains("short") -> 15000L // 15초
+                    url.startsWith("http") -> 60000L // 기본 1분
+                    url.endsWith(".m4a") -> 90000L // m4a 파일은 1분 30초 기본값
+                    else -> 30000L // 기본 30초
+                }
+                
+                _duration.value = totalDuration
+                startPositionUpdates()
+                println("🎵 AudioPlaybackManager - 실제 m4a 재생 시작 - ${totalDuration/1000}초")
+            } else {
+                throw Exception("Swift 브릿지를 사용할 수 없습니다")
+            }
+        } catch (e: Exception) {
+            println("❌ AudioPlaybackManager - Swift 브릿지 실패, 폴백 모드: ${e.message}")
+            
+            // 폴백 모드로 시뮬레이션 재생
+            currentUrl = url
+            currentlyPlaying = true
+            _isPlaying.value = true
+            startTime = Clock.System.now().toEpochMilliseconds() - pausedPosition
+            
+            totalDuration = when {
+                url.contains("sample") -> 45000L
+                url.contains("long") -> 120000L
+                url.contains("short") -> 15000L
+                url.startsWith("http") -> 60000L
+                url.endsWith(".m4a") -> 90000L
+                else -> 30000L
+            }
+            
+            _duration.value = totalDuration
+            startPositionUpdates()
+            println("🎵 AudioPlaybackManager - 폴백 모드 재생 - ${totalDuration/1000}초")
+        }
+    }
+    
+    private fun playFallback(url: String) {
+        println("🔄 AudioPlaybackManager 폴백 재생: $url")
         currentUrl = url
         currentlyPlaying = true
         _isPlaying.value = true
@@ -60,7 +139,7 @@ actual object AudioPlaybackManager {
         
         _duration.value = totalDuration
         startPositionUpdates()
-        println("🎵 iOS 오디오 재생 시작 - ${totalDuration/1000}초")
+        println("🎵 iOS 오디오 재생 시작 (폴백) - ${totalDuration/1000}초")
     }
     
     private fun tryPlayRealAudio(url: String) {
@@ -81,7 +160,18 @@ actual object AudioPlaybackManager {
     }
     
     actual fun pause() {
-        println("⏸️ AudioPlaybackManager - iOS 일시정지")
+        println("⏸️ AudioPlaybackManager - iOS 앱 내 일시정지")
+        try {
+            if (SwiftAudioBridge.isAvailable()) {
+                SwiftAudioBridge.pause()
+                println("✅ AudioPlaybackManager - Swift 브릿지를 통한 일시정지 성공")
+            } else {
+                println("⏸️ AudioPlaybackManager - Swift 브릿지 없이 일시정지 (시뮬레이션)")
+            }
+        } catch (e: Exception) {
+            println("❌ AudioPlaybackManager - Swift 브릿지 일시정지 실패: ${e.message}")
+        }
+        
         currentlyPlaying = false
         _isPlaying.value = false
         pausedPosition = getCurrentPosition()
@@ -90,14 +180,28 @@ actual object AudioPlaybackManager {
     
     actual fun resume() {
         println("▶️ AudioPlaybackManager - iOS 재생 재개")
-        currentlyPlaying = true
-        _isPlaying.value = true
-        startTime = Clock.System.now().toEpochMilliseconds() - pausedPosition
-        startPositionUpdates()
+        // 재개는 현재 URL로 다시 재생
+        currentUrl?.let { url ->
+            play(url)
+        } ?: run {
+            println("❌ 재개할 URL이 없습니다")
+        }
     }
     
     actual fun stop() {
-        println("⏹️ AudioPlaybackManager - iOS 정지")
+        println("⏹️ AudioPlaybackManager - iOS 앱 내 정지")
+        
+        try {
+            if (SwiftAudioBridge.isAvailable()) {
+                SwiftAudioBridge.stop()
+                println("✅ AudioPlaybackManager - Swift 브릿지를 통한 정지 성공")
+            } else {
+                println("⏹️ AudioPlaybackManager - Swift 브릿지 없이 정지 (시뮬레이션)")
+            }
+        } catch (e: Exception) {
+            println("❌ AudioPlaybackManager - Swift 브릿지 정지 실패: ${e.message}")
+        }
+        
         currentlyPlaying = false
         _isPlaying.value = false
         pausedPosition = 0L

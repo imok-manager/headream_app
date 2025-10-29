@@ -1,9 +1,9 @@
-package co.kr.imok.headream.app.network
+package co.kr.imokapp.headream.network
 
-import co.kr.imok.headream.app.data.LoginRequest
-import co.kr.imok.headream.app.data.LoginResponse
-import co.kr.imok.headream.app.platform.DeviceInfoProvider
-import co.kr.imok.headream.app.platform.PhoneNumberProvider
+import co.kr.imokapp.headream.data.LoginRequest
+import co.kr.imokapp.headream.data.LoginResponse
+import co.kr.imokapp.headream.platform.DeviceInfoProvider
+import co.kr.imokapp.headream.platform.PhoneNumberProvider
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*

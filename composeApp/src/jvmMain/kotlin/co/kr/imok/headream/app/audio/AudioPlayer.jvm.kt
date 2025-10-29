@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.audio
+package co.kr.imokapp.headream.audio
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

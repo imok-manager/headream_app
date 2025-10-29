@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.platform
+package co.kr.imokapp.headream.platform
 
 actual class PhoneNumberProvider actual constructor() {
     actual fun getPhoneNumber(): String? {

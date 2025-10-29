@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.ui
+package co.kr.imokapp.headream.ui
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
@@ -15,12 +15,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.background
 import kotlinx.coroutines.delay
-import co.kr.imok.headream.app.audio.AudioPlaybackManager
-import co.kr.imok.headream.app.audio.initializeAudioWithContext
-import co.kr.imok.headream.app.data.CallRecord
-import co.kr.imok.headream.app.navigation.BottomNavItem
-import co.kr.imok.headream.app.navigation.Screen
-import co.kr.imok.headream.app.viewmodel.CallViewModel
+import co.kr.imokapp.headream.audio.AudioPlaybackManager
+import co.kr.imokapp.headream.audio.initializeAudioWithContext
+import co.kr.imokapp.headream.data.CallRecord
+import co.kr.imokapp.headream.navigation.BottomNavItem
+import co.kr.imokapp.headream.navigation.Screen
+import co.kr.imokapp.headream.viewmodel.CallViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -159,7 +159,7 @@ actual fun MainAppScreenWithBackHandler(
         Column(
             modifier = modifier.fillMaxSize()
         ) {
-            // 상태바 영역 배경색 (해드림 브랜드 색상)
+            // 상태바 영역 배경색 (토닥 브랜드 색상)
             Spacer(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -185,7 +185,7 @@ actual fun MainAppScreenWithBackHandler(
                             println("🔥 onStartCall - 기기 전화번호: ${devicePhoneNumber ?: "없음"}")
                             
                             // 실제 전화 걸기 (기존 로직)
-                            viewModel.startCall("010-8745-8123")
+                            viewModel.startCall("010-4798-8123")
                         },
                         modifier = Modifier.fillMaxSize()
                     )

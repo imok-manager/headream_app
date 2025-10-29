@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app
+package co.kr.imokapp.headream
 
 import android.os.Build
 

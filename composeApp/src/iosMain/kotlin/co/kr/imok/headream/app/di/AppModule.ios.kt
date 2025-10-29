@@ -1,16 +1,16 @@
-package co.kr.imok.headream.app.di
+package co.kr.imokapp.headream.di
 
-import co.kr.imok.headream.app.Platform
-import co.kr.imok.headream.app.getPlatform
-import co.kr.imok.headream.app.data.UserManager
-import co.kr.imok.headream.app.network.ApiClient
-import co.kr.imok.headream.app.network.HaedreamApiClient
-import co.kr.imok.headream.app.phone.PhoneManager
-import co.kr.imok.headream.app.phone.createPhoneManager
-import co.kr.imok.headream.app.platform.PhoneNumberProvider
-import co.kr.imok.headream.app.platform.PreferencesManager
-import co.kr.imok.headream.app.platform.DeviceInfoProvider
-import co.kr.imok.headream.app.viewmodel.CallViewModel
+import co.kr.imokapp.headream.Platform
+import co.kr.imokapp.headream.getPlatform
+import co.kr.imokapp.headream.data.UserManager
+import co.kr.imokapp.headream.network.ApiClient
+import co.kr.imokapp.headream.network.HaedreamApiClient
+import co.kr.imokapp.headream.phone.PhoneManager
+import co.kr.imokapp.headream.phone.createPhoneManager
+import co.kr.imokapp.headream.platform.PhoneNumberProvider
+import co.kr.imokapp.headream.platform.PreferencesManager
+import co.kr.imokapp.headream.platform.DeviceInfoProvider
+import co.kr.imokapp.headream.viewmodel.CallViewModel
 
 actual class AppModule {
     

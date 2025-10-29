@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app
+package co.kr.imokapp.headream
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

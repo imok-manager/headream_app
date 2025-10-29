@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.audio
+package co.kr.imokapp.headream.audio
 
 import android.content.Context
 import androidx.media3.common.MediaItem

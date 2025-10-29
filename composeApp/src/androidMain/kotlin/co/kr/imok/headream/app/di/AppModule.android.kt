@@ -1,15 +1,15 @@
-package co.kr.imok.headream.app.di
+package co.kr.imokapp.headream.di
 
 import android.content.Context
-import co.kr.imok.headream.app.AndroidPlatform
-import co.kr.imok.headream.app.Platform
-import co.kr.imok.headream.app.data.UserManager
-import co.kr.imok.headream.app.network.ApiClient
-import co.kr.imok.headream.app.network.HaedreamApiClient
-import co.kr.imok.headream.app.phone.PhoneManager
-import co.kr.imok.headream.app.phone.PhoneManagerImpl
-import co.kr.imok.headream.app.platform.PhoneNumberProvider
-import co.kr.imok.headream.app.viewmodel.CallViewModel
+import co.kr.imokapp.headream.AndroidPlatform
+import co.kr.imokapp.headream.Platform
+import co.kr.imokapp.headream.data.UserManager
+import co.kr.imokapp.headream.network.ApiClient
+import co.kr.imokapp.headream.network.HaedreamApiClient
+import co.kr.imokapp.headream.phone.PhoneManager
+import co.kr.imokapp.headream.phone.PhoneManagerImpl
+import co.kr.imokapp.headream.platform.PhoneNumberProvider
+import co.kr.imokapp.headream.viewmodel.CallViewModel
 
 actual class AppModule(private val context: Context) {
     

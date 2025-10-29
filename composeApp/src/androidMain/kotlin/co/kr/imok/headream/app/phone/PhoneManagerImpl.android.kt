@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.phone
+package co.kr.imokapp.headream.phone
 
 import android.Manifest
 import android.content.Context
@@ -13,7 +13,7 @@ import android.telephony.TelephonyManager
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import kotlinx.coroutines.suspendCancellableCoroutine
-import co.kr.imok.headream.app.data.CallStatus
+import co.kr.imokapp.headream.data.CallStatus
 import java.io.File
 import java.io.IOException
 import java.util.concurrent.Executor

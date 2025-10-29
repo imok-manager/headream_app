@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.platform
+package co.kr.imokapp.headream.platform
 
 import android.Manifest
 import android.content.Context

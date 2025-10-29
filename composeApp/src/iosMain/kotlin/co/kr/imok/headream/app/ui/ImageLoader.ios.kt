@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.ui
+package co.kr.imokapp.headream.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,8 +14,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinproject.composeapp.generated.resources.Res
-import kotlinproject.composeapp.generated.resources.banner_counseling
-import kotlinproject.composeapp.generated.resources.logo_haedream
+import kotlinproject.composeapp.generated.resources.main_banner
+import kotlinproject.composeapp.generated.resources.logo_todoc
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -25,17 +25,17 @@ actual fun PlatformImage(
     modifier: Modifier
 ) {
     when (resourceName) {
-        "logo_haedream" -> {
+        "logo_todoc" -> {
             Image(
-                painter = painterResource(Res.drawable.logo_haedream),
+                painter = painterResource(Res.drawable.logo_todoc),
                 contentDescription = contentDescription,
                 modifier = modifier,
                 contentScale = ContentScale.Fit
             )
         }
-        "banner_counseling" -> {
+        "main_banner" -> {
             Image(
-                painter = painterResource(Res.drawable.banner_counseling),
+                painter = painterResource(Res.drawable.main_banner),
                 contentDescription = contentDescription,
                 modifier = modifier,
                 contentScale = ContentScale.Fit
@@ -59,8 +59,8 @@ actual fun PlatformImage(
 @Composable
 actual fun LogoImage(modifier: Modifier) {
     PlatformImage(
-        resourceName = "logo_haedream",
-        contentDescription = "해드림 로고",
+        resourceName = "logo_todoc",
+        contentDescription = "토닥 로고",
         modifier = modifier
     )
 }
@@ -68,9 +68,9 @@ actual fun LogoImage(modifier: Modifier) {
 @Composable
 actual fun BannerImage(modifier: Modifier) {
     Image(
-        painter = painterResource(Res.drawable.banner_counseling),
+        painter = painterResource(Res.drawable.main_banner),
         contentDescription = "상담 안내 배너",
         modifier = modifier,
-        contentScale = ContentScale.Crop
+        contentScale = ContentScale.FillWidth
     )
 }

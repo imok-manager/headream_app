@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.ui
+package co.kr.imokapp.headream.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -15,10 +15,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import co.kr.imok.headream.app.data.CallHistory
-import co.kr.imok.headream.app.data.CallRecord
-import co.kr.imok.headream.app.data.CallStatus
-import co.kr.imok.headream.app.viewmodel.CallViewModel
+import co.kr.imokapp.headream.data.CallHistory
+import co.kr.imokapp.headream.data.CallRecord
+import co.kr.imokapp.headream.data.CallStatus
+import co.kr.imokapp.headream.viewmodel.CallViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

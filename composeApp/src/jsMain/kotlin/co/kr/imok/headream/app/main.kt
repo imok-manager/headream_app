@@ -1,9 +1,9 @@
-package co.kr.imok.headream.app
+package co.kr.imokapp.headream
 
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.ComposeViewport
 import kotlinx.browser.document
-import co.kr.imok.headream.app.di.AppModule
+import co.kr.imokapp.headream.di.AppModule
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {

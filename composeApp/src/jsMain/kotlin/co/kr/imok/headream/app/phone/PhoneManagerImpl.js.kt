@@ -1,6 +1,6 @@
-package co.kr.imok.headream.app.phone
+package co.kr.imokapp.headream.phone
 
-import co.kr.imok.headream.app.data.CallStatus
+import co.kr.imokapp.headream.data.CallStatus
 import kotlinx.browser.window
 
 class PhoneManagerImpl : PhoneManager {

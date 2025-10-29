@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.navigation
+package co.kr.imokapp.headream.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Help

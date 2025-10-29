@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.ui
+package co.kr.imokapp.headream.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -24,8 +24,8 @@ actual fun PlatformImage(
 ) {
     val context = LocalContext.current
     val resourceId = when (resourceName) {
-        "logo_haedream" -> context.resources.getIdentifier("logo_haedream", "drawable", context.packageName)
-        "banner_counseling" -> context.resources.getIdentifier("banner_counseling", "drawable", context.packageName)
+        "logo_todoc" -> context.resources.getIdentifier("logo_todoc", "drawable", context.packageName)
+        "main_banner" -> context.resources.getIdentifier("main_banner", "drawable", context.packageName)
         else -> 0
     }
     
@@ -42,8 +42,8 @@ actual fun PlatformImage(
 @Composable
 actual fun LogoImage(modifier: Modifier) {
     PlatformImage(
-        resourceName = "logo_haedream",
-        contentDescription = "해드림 로고",
+        resourceName = "logo_todoc",
+        contentDescription = "토닥 로고",
         modifier = modifier
     )
 }
@@ -51,14 +51,14 @@ actual fun LogoImage(modifier: Modifier) {
 @Composable
 actual fun BannerImage(modifier: Modifier) {
     val context = LocalContext.current
-    val resourceId = context.resources.getIdentifier("banner_counseling", "drawable", context.packageName)
+    val resourceId = context.resources.getIdentifier("main_banner", "drawable", context.packageName)
     
     if (resourceId != 0) {
         Image(
             painter = painterResource(id = resourceId),
             contentDescription = "상담 안내 배너",
             modifier = modifier,
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.FillWidth
         )
     } else {
         // 이미지가 없을 경우 텍스트 대체

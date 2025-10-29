@@ -1,11 +1,11 @@
-package co.kr.imok.headream.app.ui
+package co.kr.imokapp.headream.ui
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import co.kr.imok.headream.app.data.CallRecord
-import co.kr.imok.headream.app.navigation.Screen
-import co.kr.imok.headream.app.viewmodel.CallViewModel
-import co.kr.imok.headream.app.data.UserManager
+import co.kr.imokapp.headream.data.CallRecord
+import co.kr.imokapp.headream.navigation.Screen
+import co.kr.imokapp.headream.viewmodel.CallViewModel
+import co.kr.imokapp.headream.data.UserManager
 import kotlinx.coroutines.launch
 
 @Composable

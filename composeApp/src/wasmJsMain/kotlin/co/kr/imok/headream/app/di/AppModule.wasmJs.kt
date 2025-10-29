@@ -1,9 +1,9 @@
-package co.kr.imok.headream.app.di
+package co.kr.imokapp.headream.di
 
-import co.kr.imok.headream.app.network.ApiClient
-import co.kr.imok.headream.app.phone.PhoneManager
-import co.kr.imok.headream.app.phone.createPhoneManager
-import co.kr.imok.headream.app.viewmodel.CallViewModel
+import co.kr.imokapp.headream.network.ApiClient
+import co.kr.imokapp.headream.phone.PhoneManager
+import co.kr.imokapp.headream.phone.createPhoneManager
+import co.kr.imokapp.headream.viewmodel.CallViewModel
 
 actual class AppModule {
     

@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.data
+package co.kr.imokapp.headream.data
 
 import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable

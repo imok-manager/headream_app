@@ -1,6 +1,6 @@
-package co.kr.imok.headream.app.platform
+package co.kr.imokapp.headream.platform
 
-import co.kr.imok.headream.app.data.DeviceInfo
+import co.kr.imokapp.headream.data.DeviceInfo
 import kotlin.js.Date
 import kotlin.random.Random
 

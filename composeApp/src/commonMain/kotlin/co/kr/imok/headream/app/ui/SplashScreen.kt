@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.ui
+package co.kr.imokapp.headream.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -35,7 +35,7 @@ fun SplashScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // HAEDREAM 로고 (Android에서는 이미지, 다른 플랫폼에서는 텍스트)
+            // 토닥 로고 (Android에서는 이미지, 다른 플랫폼에서는 텍스트)
             LogoImage(
                 modifier = Modifier
                     .fillMaxWidth(0.8f)

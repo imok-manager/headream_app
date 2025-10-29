@@ -1,8 +1,8 @@
-package co.kr.imok.headream.app.platform
+package co.kr.imokapp.headream.platform
 
 import android.os.Build
 import android.provider.Settings
-import co.kr.imok.headream.app.data.DeviceInfo
+import co.kr.imokapp.headream.data.DeviceInfo
 import java.util.*
 
 actual class DeviceInfoProvider {

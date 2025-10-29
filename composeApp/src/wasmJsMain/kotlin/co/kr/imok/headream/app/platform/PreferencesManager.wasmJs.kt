@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.platform
+package co.kr.imokapp.headream.platform
 
 // WASM에서는 간단한 메모리 기반 저장소 사용
 actual class PreferencesManager actual constructor() {

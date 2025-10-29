@@ -1,4 +1,4 @@
-package co.kr.imok.headream.app.audio
+package co.kr.imokapp.headream.audio
 
 actual fun initializeAudioWithContext(context: Any) {
     // iOS는 Context가 필요하지 않음

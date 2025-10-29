@@ -1,21 +1,21 @@
-package co.kr.imok.headream.app.viewmodel
+package co.kr.imokapp.headream.viewmodel
 
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
-import co.kr.imok.headream.app.data.*
-import co.kr.imok.headream.app.network.ApiClient
-import co.kr.imok.headream.app.phone.PhoneManager
-import co.kr.imok.headream.app.platform.PhoneNumberProvider
-import co.kr.imok.headream.app.platform.DeviceInfoProvider
+import co.kr.imokapp.headream.data.*
+import co.kr.imokapp.headream.network.ApiClient
+import co.kr.imokapp.headream.phone.PhoneManager
+import co.kr.imokapp.headream.platform.PhoneNumberProvider
+import co.kr.imokapp.headream.platform.DeviceInfoProvider
 
 class CallViewModel(
     private val phoneManager: PhoneManager,
     private val apiClient: ApiClient,
-    private val haedreamApiClient: co.kr.imok.headream.app.network.HaedreamApiClient,
-    private val userManager: co.kr.imok.headream.app.data.UserManager,
+    private val haedreamApiClient: co.kr.imokapp.headream.network.HaedreamApiClient,
+    private val userManager: co.kr.imokapp.headream.data.UserManager,
     private val phoneNumberProvider: PhoneNumberProvider
 ) : ViewModel() {
     
@@ -48,6 +48,111 @@ class CallViewModel(
     
     var callHistories by mutableStateOf<List<CallHistory>>(emptyList())
         private set
+    
+    // iOS 전용: 전화번호 수집 없이 통화 시작 (전화 앱만 열기)
+    fun startCallForIOS(phoneNumber: String) {
+        viewModelScope.launch {
+            println("📱 iOS - 전화 연결 시작 (전화번호 수집 불가, 모니터링 없음)")
+            
+            uiState = uiState.copy(
+                phoneNumber = phoneNumber,
+                isLoading = true,
+                errorMessage = null
+            )
+            
+            try {
+                // UUID 가져오기
+                val userUuid = try {
+                    val currentUser = userManager.currentUser.value
+                    val userManagerUuid = currentUser?.uuid
+                    val stateFlowUuid = userManager.userUuid.value
+                    val deviceInfoProvider = DeviceInfoProvider()
+                    val deviceUuid = deviceInfoProvider.getOrCreateUUID()
+                    
+                    userManagerUuid ?: stateFlowUuid ?: deviceUuid
+                } catch (e: Exception) {
+                    println("❌ UUID 가져오기 실패: ${e.message}")
+                    try {
+                        val deviceInfoProvider = DeviceInfoProvider()
+                        deviceInfoProvider.getOrCreateUUID()
+                    } catch (ex: Exception) {
+                        "fallback-uuid-${Clock.System.now().toEpochMilliseconds()}"
+                    }
+                }
+                
+                // 통화 시작 시간 기록
+                val startTime = Clock.System.now()
+                callStartTime = startTime
+                
+                println("📞 iOS 통화 시작 준비:")
+                println("- userUuid: $userUuid")
+                println("- phoneNumber: unknown (iOS는 전화번호 수집 불가)")
+                println("- callStartTime: $startTime")
+                println("📱 iOS - isCallActive 설정하지 않음 (모니터링 비활성화)")
+                
+                // iOS는 isCallActive를 설정하지 않음 (모니터링 방지)
+                // isCallActive = true  <- 이 줄을 주석 처리하여 모니터링 시작을 방지
+                
+                // 전화 앱만 열기 (모니터링 없음)
+                phoneManager.makeCall(phoneNumber)
+                    .onSuccess {
+                        println("✅ iOS - 전화 앱 열기 성공 (모니터링 시작 안 함)")
+                        uiState = uiState.copy(
+                            isLoading = false,
+                            callStatus = CallStatus.DIALING
+                        )
+                        
+                        // 즉시 API 호출 (전화번호 없이)
+                        sendCallStartToServerForIOS(userUuid, startTime)
+                    }
+                    .onFailure { error ->
+                        println("❌ iOS - 전화 앱 열기 실패: ${error.message}")
+                        uiState = uiState.copy(
+                            isLoading = false,
+                            errorMessage = error.message ?: "전화 앱을 열 수 없습니다"
+                        )
+                    }
+                
+            } catch (e: Exception) {
+                println("💥 iOS 통화 오류: ${e.message}")
+                uiState = uiState.copy(
+                    isLoading = false,
+                    errorMessage = e.message
+                )
+            }
+        }
+    }
+    
+    // iOS 전용: 통화 시작 API 호출 (전화번호 없이)
+    private fun sendCallStartToServerForIOS(userUuid: String, startTime: kotlinx.datetime.Instant) {
+        viewModelScope.launch {
+            try {
+                val callRequest = CallRequest(
+                    userUuid = userUuid,
+                    callType = "outgoing",
+                    phoneNumber = "unknown", // iOS는 전화번호 수집 불가
+                    callStartTime = startTime.toString(),
+                    callEndTime = startTime.toString(), // 시작과 동시에 전송
+                    callDuration = 0 // iOS는 통화 시간 측정 불가
+                )
+                
+                println("📞 iOS 통화 기록 API 호출:")
+                println("- userUuid: ${callRequest.userUuid}")
+                println("- phoneNumber: unknown (iOS 정책)")
+                println("- callStartTime: ${callRequest.callStartTime}")
+                
+                val result = haedreamApiClient.startCall(callRequest)
+                result.onSuccess { callResponse ->
+                    println("✅ iOS 통화 기록 저장 성공: ${callResponse.message}")
+                }.onFailure { error ->
+                    println("❌ iOS 통화 기록 저장 실패: ${error.message}")
+                }
+                
+            } catch (e: Exception) {
+                println("💥 iOS 통화 API 오류: ${e.message}")
+            }
+        }
+    }
     
     fun startCall(phoneNumber: String) {
         viewModelScope.launch {
@@ -498,7 +603,7 @@ class CallViewModel(
         return listOf(
             CallRecord(
                 id = "1",
-                phoneNumber = "010-8745-8123",
+                phoneNumber = "010-4798-8123",
                 counselorName = "나혜리",
                 duration = 227, // 3분 47초
                 timestamp = Clock.System.now(),
@@ -509,7 +614,7 @@ class CallViewModel(
             ),
             CallRecord(
                 id = "2", 
-                phoneNumber = "010-8745-8123",
+                phoneNumber = "010-4798-8123",
                 counselorName = "나혜리",
                 duration = 145, // 2분 25초
                 timestamp = Clock.System.now(),
@@ -520,7 +625,7 @@ class CallViewModel(
             ),
             CallRecord(
                 id = "3",
-                phoneNumber = "010-8745-8123", 
+                phoneNumber = "010-4798-8123", 
                 counselorName = "나혜리",
                 duration = 0,
                 timestamp = Clock.System.now(),
@@ -530,7 +635,7 @@ class CallViewModel(
             ),
             CallRecord(
                 id = "4",
-                phoneNumber = "010-8745-8123",
+                phoneNumber = "010-4798-8123",
                 counselorName = "나혜리", 
                 duration = 312, // 5분 12초
                 timestamp = Clock.System.now(),

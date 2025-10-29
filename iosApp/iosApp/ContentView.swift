@@ -14,6 +14,11 @@ struct ContentView: View {
     var body: some View {
         ComposeView()
             .ignoresSafeArea()
+            .onAppear {
+                // AudioBridge 초기화 (Notification 리스너 설정)
+                _ = AudioBridge.shared
+                print("✅ AudioBridge 초기화 완료")
+            }
     }
 }
 
